@@ -10,5 +10,5 @@ steps:
   inputs:
     containerregistrytype: 'Azure Container Registry'
     dockerComposeFile: '**/docker-compose.yml'
-    action: 'Run a Docker Compose command'
-    dockerComposeCommand: 'up'
+    action: 'Run services'
+    arguments: '-e COMPOSE_DOCKER_CLI_BUILD=1 DOCKER_BUILDKIT=1'
