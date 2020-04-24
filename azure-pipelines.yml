@@ -4,6 +4,9 @@ trigger:
 
 pool:
   vmImage: 'ubuntu-latest'
+  environment:
+    - COMPOSE_DOCKER_CLI_BUILD=1
+    - DOCKER_BUILDKIT=1
 
 steps:
 - task: DockerCompose@0
