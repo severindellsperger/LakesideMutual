@@ -4,13 +4,13 @@ trigger:
 
 pool:
   vmImage: 'ubuntu-latest'
-  environment:
-    - COMPOSE_DOCKER_CLI_BUILD=1
-    - DOCKER_BUILDKIT=1
 
 steps:
 - task: DockerCompose@0
   inputs:
     containerregistrytype: 'Azure Container Registry'
     dockerComposeFile: '**/docker-compose.yml'
+    dockerComposeFileArgs: |
+      COMPOSE_DOCKER_CLI_BUILD=1
+      DOCKER_BUILDKIT=1
     action: 'Run services'
