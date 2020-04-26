@@ -17,15 +17,17 @@ variables:
 
 steps:
 - task: Docker@2
-  displayName: Build an image
+  displayName: Build customer-core
   inputs:
+    containerRegistry: 'LakeSideDockerRegistry'
     repository: customer-core
-    command: buildAndPush
+    command: build
     Dockerfile: customer-core/Dockerfile
 
 - task: Docker@2
   displayName: Build an image
   inputs:
+    containerRegistry: 'LakeSideDockerRegistry'
     repository: customer-management-backend
     command: buildAndPush
     Dockerfile: customer-management-backend/Dockerfile
@@ -33,6 +35,7 @@ steps:
 - task: Docker@2
   displayName: Build an image
   inputs:
+    containerRegistry: 'LakeSideDockerRegistry'
     repository: customer-management-frontend
     command: buildAndPush
     Dockerfile: customer-management-frontend/Dockerfile
