@@ -6,15 +6,30 @@ pool:
   vmImage: 'ubuntu-latest'
 
 steps:
-
-- task: AzureRmWebAppDeployment@4
+- task: DockerCompose@0
   inputs:
-    ConnectionType: 'AzureRM'
+    containerregistrytype: 'Azure Container Registry'
     azureSubscription: 'Azure for Students(89332acc-e99a-4a6e-8d22-d9115e1c77d1)'
-    appType: 'webAppContainer'
-    WebAppName: 'lakesidedocker'
-    deployToSlotOrASE: true
-    ResourceGroupName: 'docker-rg'
-    SlotName: 'production'
-    DockerNamespace: 'lakesidedockerregistry.azurecr.io'
-    DockerRepository: 'severindellspergerlakesidemutual_proxy'
+    azureContainerRegistry: '{"loginServer":"lakesidedockerregistry.azurecr.io", "id" : "/subscriptions/89332acc-e99a-4a6e-8d22-d9115e1c77d1/resourceGroups/appsvc_linux_centralus/providers/Microsoft.ContainerRegistry/registries/LakeSideDockerRegistry"}'
+    dockerComposeFile: '**/docker-compose.yml'
+    dockerComposeFileArgs: 'COMPOSE_DOCKER_CLI_BUILD=1 DOCKER_BUILDKIT=1'
+    action: 'Build services'
+
+- task: DockerCompose@0
+  inputs:
+    containerregistrytype: 'Azure Container Registry'
+    azureSubscription: 'Azure for Students(89332acc-e99a-4a6e-8d22-d9115e1c77d1)'
+    azureContainerRegistry: '{"loginServer":"lakesidedockerregistry.azurecr.io", "id" : "/subscriptions/89332acc-e99a-4a6e-8d22-d9115e1c77d1/resourceGroups/appsvc_linux_centralus/providers/Microsoft.ContainerRegistry/registries/LakeSideDockerRegistry"}'
+    dockerComposeFile: '**/docker-compose.yml'
+    dockerComposeFileArgs: 'COMPOSE_DOCKER_CLI_BUILD=1 DOCKER_BUILDKIT=1'
+    action: 'Push services'
+
+- task: DockerCompose@0
+  inputs:
+    containerregistrytype: 'Azure Container Registry'
+    azureSubscription: 'Azure for Students(89332acc-e99a-4a6e-8d22-d9115e1c77d1)'
+    azureContainerRegistry: '{"loginServer":"lakesidedockerregistry.azurecr.io", "id" : "/subscriptions/89332acc-e99a-4a6e-8d22-d9115e1c77d1/resourceGroups/appsvc_linux_centralus/providers/Microsoft.ContainerRegistry/registries/LakeSideDockerRegistry"}'
+    dockerComposeFile: '**/docker-compose.yml'
+    dockerComposeFileArgs: 'COMPOSE_DOCKER_CLI_BUILD=1 DOCKER_BUILDKIT=1'
+    action: 'Run services'
+
