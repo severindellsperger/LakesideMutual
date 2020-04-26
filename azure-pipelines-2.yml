@@ -34,4 +34,4 @@ steps:
     azureSubscription: 'Azure for Students(89332acc-e99a-4a6e-8d22-d9115e1c77d1)'
     appName: 'customer-mgmt-frontend-docker'
     containers: 'customer-management-frontend'
-    appSettings: 'REACT_APP_CUSTOMER_MANAGEMENT_BACKEND:https://customer-mgmt-backend-docker.azurewebsites.net/'
+    appSettings: 'REACT_APP_CUSTOMER_MANAGEMENT_BACKEND':'https://customer-mgmt-backend-docker.azurewebsites.net/'
