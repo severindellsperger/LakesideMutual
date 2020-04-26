@@ -19,19 +19,19 @@ steps:
 - task: AzureWebAppContainer@1
   inputs:
     azureSubscription: 'Azure for Students(89332acc-e99a-4a6e-8d22-d9115e1c77d1)'
-    appName: 'akesidedockerregistry.azurecr.io/customer-core-docker'
+    appName: 'lakesidedockerregistry.azurecr.io/customer-core-docker'
     containers: 'customer-core'
 
 - task: AzureWebAppContainer@1
   inputs:
     azureSubscription: 'Azure for Students(89332acc-e99a-4a6e-8d22-d9115e1c77d1)'
     appName: 'customer-mgmt-backend-docker'
-    containers: 'akesidedockerregistry.azurecr.io/customer-management-backend'
+    containers: 'lakesidedockerregistry.azurecr.io/customer-management-backend'
     appSettings: -CUSTOMERCORE_BASEURL http://customer-core-docker.azurewebsites.net/
 
 - task: AzureWebAppContainer@1
   inputs:
     azureSubscription: 'Azure for Students(89332acc-e99a-4a6e-8d22-d9115e1c77d1)'
     appName: 'customer-mgmt-frontend-docker'
-    containers: 'akesidedockerregistry.azurecr.io/customer-management-frontend'
+    containers: 'lakesidedockerregistry.azurecr.io/customer-management-frontend'
     appSettings: -REACT_APP_CUSTOMER_MANAGEMENT_BACKEND https://customer-mgmt-backend-docker.azurewebsites.net/
