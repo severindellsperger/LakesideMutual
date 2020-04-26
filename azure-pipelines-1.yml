@@ -12,7 +12,7 @@ resources:
   # Agent VM image name
   vmImageName: 'ubuntu-latest'
 
-stages:
+steps:
 - task: Docker@2
   inputs:
     containerRegistry: 'LakeSideDockerRegistry'
