@@ -12,7 +12,7 @@ steps:
 - task: Docker@2
   inputs:
     containerRegistry: 'LakeSideDockerRegistry'
-    command: 'buildAndPush'
+    command: 'build'
     Dockerfile: 'customer-core/Dockerfile'
     arguments: |
       COMPOSE_DOCKER_CLI_BUILD=1
@@ -21,7 +21,13 @@ steps:
 - task: Docker@2
   inputs:
     containerRegistry: 'LakeSideDockerRegistry'
-    command: 'buildAndPush'
+    command: 'push'
+    Dockerfile: 'customer-core/Dockerfile'
+
+- task: Docker@2
+  inputs:
+    containerRegistry: 'LakeSideDockerRegistry'
+    command: 'build'
     Dockerfile: 'customer-management-backend/Dockerfile'
     arguments: |
       COMPOSE_DOCKER_CLI_BUILD=1
@@ -30,9 +36,20 @@ steps:
 - task: Docker@2
   inputs:
     containerRegistry: 'LakeSideDockerRegistry'
-    command: 'buildAndPush'
+    command: 'push'
+    Dockerfile: 'customer-management-backend/Dockerfile'
+
+- task: Docker@2
+  inputs:
+    containerRegistry: 'LakeSideDockerRegistry'
+    command: 'build'
     Dockerfile: 'customer-management-frontend/Dockerfile'
     arguments: |
       COMPOSE_DOCKER_CLI_BUILD=1
       DOCKER_BUILDKIT=1
 
+- task: Docker@2
+  inputs:
+    containerRegistry: 'LakeSideDockerRegistry'
+    command: 'push'
+    Dockerfile: 'customer-management-frontend/Dockerfile'
