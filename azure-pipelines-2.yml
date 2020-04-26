@@ -37,7 +37,7 @@ steps:
     containerRegistry: 'LakeSideDockerRegistry'
     repository: customer-management-frontend
     command: buildAndPush
-    Dockerfile: customer-management-frontend/Dockerfile$
+    Dockerfile: customer-management-frontend/Dockerfile
 
 - task: AzureWebAppContainer@1
   inputs:
