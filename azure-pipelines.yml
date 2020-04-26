@@ -11,4 +11,4 @@ steps:
 - task: Docker@2
   inputs:
     command: 'buildAndPush'
-    Dockerfile: '/customer-core/Dockerfile'
+    Dockerfile: 'customer-core/Dockerfile'
