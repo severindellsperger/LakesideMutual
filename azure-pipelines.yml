@@ -17,4 +17,4 @@ steps:
     ResourceGroupName: 'docker-rg'
     SlotName: 'production'
     DockerNamespace: 'lakesidedockerregistry.azurecr.io'
-    DockerRepository: 'severindellspergerlakesidemutual_app'
+    DockerRepository: 'severindellspergerlakesidemutual_proxy'
