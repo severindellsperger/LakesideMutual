@@ -21,11 +21,11 @@ steps:
   inputs:
     containerRegistry: 'LakeSideDockerRegistry'
     repository: customer-core
-    command: build
+    command: buildAndPush
     Dockerfile: customer-core/Dockerfile
 
 - task: Docker@2
-  displayName: Build an image
+  displayName: Build customer-management-backend
   inputs:
     containerRegistry: 'LakeSideDockerRegistry'
     repository: customer-management-backend
@@ -33,7 +33,7 @@ steps:
     Dockerfile: customer-management-backend/Dockerfile
 
 - task: Docker@2
-  displayName: Build an image
+  displayName: Build customer-management-frontend
   inputs:
     containerRegistry: 'LakeSideDockerRegistry'
     repository: customer-management-frontend
