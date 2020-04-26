@@ -12,26 +12,49 @@ pool:
 variables:
   DOCKER_BUILDKIT: 1
   COMPOSE_DOCKER_CLI_BUILD: 1
+  tag: '$(Build.BuildId)'
 
 
 steps:
+- task: Docker@2
+  displayName: Build customer-core
+  inputs:
+    containerRegistry: 'LakeSideDockerRegistry'
+    repository: customer-core
+    command: buildAndPush
+    Dockerfile: customer-core/Dockerfile
 
+- task: Docker@2
+  displayName: Build customer-management-backend
+  inputs:
+    containerRegistry: 'LakeSideDockerRegistry'
+    repository: customer-management-backend
+    command: buildAndPush
+    Dockerfile: customer-management-backend/Dockerfile
+
+- task: Docker@2
+  displayName: Build customer-management-frontend
+  inputs:
+    containerRegistry: 'LakeSideDockerRegistry'
+    repository: customer-management-frontend
+    command: buildAndPush
+    Dockerfile: customer-management-frontend/Dockerfile
 - task: AzureWebAppContainer@1
   inputs:
     azureSubscription: 'Azure for Students(89332acc-e99a-4a6e-8d22-d9115e1c77d1)'
     appName: 'customer-core-docker'
-    containers: 'lakesidedockerregistry.azurecr.io/customer-core:108'
+    containers: 'lakesidedockerregistry.azurecr.io/customer-core:$(tag)'
 
 - task: AzureWebAppContainer@1
   inputs:
     azureSubscription: 'Azure for Students(89332acc-e99a-4a6e-8d22-d9115e1c77d1)'
     appName: 'customer-mgmt-backend-docker'
-    containers: 'lakesidedockerregistry.azurecr.io/customer-management-backend:108'
+    containers: 'lakesidedockerregistry.azurecr.io/customer-management-backend:$(tag)'
     appSettings: -CUSTOMERCORE_BASEURL http://customer-core-docker.azurewebsites.net/
 
 - task: AzureWebAppContainer@1
   inputs:
     azureSubscription: 'Azure for Students(89332acc-e99a-4a6e-8d22-d9115e1c77d1)'
     appName: 'customer-mgmt-frontend-docker'
-    containers: 'lakesidedockerregistry.azurecr.io/customer-management-frontend:108'
+    containers: 'lakesidedockerregistry.azurecr.io/customer-management-frontend:$(tag)'
     appSettings: -REACT_APP_CUSTOMER_MANAGEMENT_BACKEND https://customer-mgmt-backend-docker.azurewebsites.net/
