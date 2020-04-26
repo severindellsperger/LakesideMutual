@@ -14,16 +14,25 @@ steps:
     containerRegistry: 'LakeSideDockerRegistry'
     command: 'buildAndPush'
     Dockerfile: 'customer-core/Dockerfile'
+    arguments: |
+      COMPOSE_DOCKER_CLI_BUILD=1
+      DOCKER_BUILDKIT=1
 
 - task: Docker@2
   inputs:
     containerRegistry: 'LakeSideDockerRegistry'
     command: 'buildAndPush'
     Dockerfile: 'customer-management-backend/Dockerfile'
+    arguments: |
+      COMPOSE_DOCKER_CLI_BUILD=1
+      DOCKER_BUILDKIT=1
 
 - task: Docker@2
   inputs:
     containerRegistry: 'LakeSideDockerRegistry'
     command: 'buildAndPush'
     Dockerfile: 'customer-management-frontend/Dockerfile'
+    arguments: |
+      COMPOSE_DOCKER_CLI_BUILD=1
+      DOCKER_BUILDKIT=1
 
